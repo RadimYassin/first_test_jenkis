@@ -15,12 +15,12 @@ public class HelloController {
 
     @GetMapping("/user")
     public String getUsers(){
-        return "Users";
+        return "User sjsjs";
     }
 
 
     @GetMapping("/presentation")
     public String getPresentation(){
-        return "presentation";
+        return "presentation  test ";
     }
 }
