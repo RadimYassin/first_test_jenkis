@@ -41,7 +41,7 @@ class HelloControllerTest {
         mockMvc.perform(get("/user"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
-                .andExpect(content().string("User dsjhqwjdjqwdc sjsjs"));
+                .andExpect(content().string("User"));
     }
 
     /**
@@ -53,7 +53,7 @@ class HelloControllerTest {
         mockMvc.perform(get("/presentation"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("text/plain;charset=UTF-8"))
-                .andExpect(content().string("presentation  hsjsj test "));
+                .andExpect(content().string("presentation"));
     }
 
     /**
