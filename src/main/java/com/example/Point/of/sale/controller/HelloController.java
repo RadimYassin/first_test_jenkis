@@ -14,7 +14,7 @@ public class HelloController {
 
     @GetMapping("/user")
     public String getUsers() {
-        return "Useshshr dsjhqwjdsskjsjsjqwdc sjsjs";
+        return "User sksk";
     }
 
     @GetMapping("/presentation")
