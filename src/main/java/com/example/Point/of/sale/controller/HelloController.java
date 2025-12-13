@@ -14,11 +14,11 @@ public class HelloController {
 
     @GetMapping("/user")
     public String getUsers() {
-        return "User sksk";
+        return "User";
     }
 
     @GetMapping("/presentation")
     public String getPresentation() {
-        return "presentation  hsjsj test ";
+        return "presentation";
     }
 }
