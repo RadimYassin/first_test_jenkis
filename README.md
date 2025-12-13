@@ -244,6 +244,28 @@ stage('SonarQube Analysis') {
 }
 ```
 
+#### Vue Jenkins - SonarQube Quality Gate
+
+L'intégration de SonarQube dans Jenkins permet de visualiser les résultats d'analyse directement dans l'interface Jenkins.
+
+![Jenkins SonarQube Quality Gate](images/jenkins-sonarqube-quality-gate.png)
+*Interface Jenkins montrant le statut du Quality Gate SonarQube*
+
+**Fonctionnalités affichées:**
+- ✅ **Status du build** - Indication visuelle du succès/échec
+- 🔍 **SonarQube Quality Gate** - Statut de la qualité du code (Passed/Failed)
+- 📋 **Permalinks** - Liens vers les builds récents
+- 🕐 **Historique des builds** - Liste chronologique des exécutions
+- 🔗 **Intégration GitHub** - Déclenchement automatique via webhook
+
+**Configuration du Quality Gate:**
+Le Quality Gate peut échouer si les critères de qualité ne sont pas respectés:
+- Présence de bugs critiques
+- Vulnérabilités de sécurité
+- Couverture de tests insuffisante
+- Duplication de code excessive
+- Dette technique trop élevée
+
 ---
 
 ## 🏗️ Architecture du Projet
