@@ -212,6 +212,40 @@ Visualisation détaillée de chaque étape du pipeline.
 
 ---
 
+## 📊 Quality Analysis with SonarQube
+
+### Tableau de bord SonarQube
+
+Le projet est analysé avec SonarQube pour assurer la qualité du code et détecter les problèmes potentiels.
+
+![SonarQube Dashboard](images/sonarqube-dashboard.png)
+*Tableau de bord SonarQube montrant les métriques de qualité du code*
+
+**Métriques de qualité:**
+- ✅ **0 Bugs** - Aucun bug détecté
+- ✅ **0 Vulnerabilities** - Aucune vulnérabilité de sécurité
+- ⚠️ **1 Hotspot Reviewed** - Point sensible de sécurité examiné
+- 📝 **3 Code Smells** - 3 problèmes de maintenabilité détectés
+- 📈 **Coverage** - Couverture du code par les tests
+- 🔄 **Duplications** - 0.0% de duplication de code
+- 📏 **50 Lines** - 50 lignes de code XML analysées
+
+### Intégration SonarQube dans le Pipeline
+
+Pour intégrer SonarQube dans votre pipeline Jenkins, ajoutez une étape d'analyse:
+
+```groovy
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            sh 'mvn sonar:sonar'
+        }
+    }
+}
+```
+
+---
+
 ## 🏗️ Architecture du Projet
 
 ```
@@ -225,6 +259,95 @@ POV-JAVA/
 ├── pom.xml             # Configuration Maven
 ├── Jenkinsfile         # Pipeline as Code (optionnel)
 └── README.md           # Ce fichier
+```
+
+---
+
+## 🧪 Tests
+
+Le projet inclut des tests unitaires et des tests d'intégration pour assurer la qualité du code.
+
+### Structure des Tests
+
+```
+src/test/java/
+└── com/example/Point/of/sale/
+    ├── PointOfSaleApplicationTests.java         # Test de contexte Spring
+    └── controller/
+        ├── HelloControllerTest.java              # Tests unitaires
+        └── HelloControllerIntegrationTest.java   # Tests d'intégration
+```
+
+### Types de Tests
+
+#### 1. Tests Unitaires (`HelloControllerTest`)
+Tests rapides utilisant `MockMvc` pour tester les endpoints sans démarrer le serveur complet.
+
+**Couverture des tests:**
+- ✅ Test du endpoint `GET /` - Message de bienvenue
+- ✅ Test du endpoint `GET /user` - Information utilisateur
+- ✅ Test du endpoint `GET /presentation` - Information de présentation
+- ✅ Vérification des codes de statut HTTP
+- ✅ Vérification du contenu des réponses
+- ✅ Test des endpoints inexistants (404)
+
+#### 2. Tests d'Intégration (`HelloControllerIntegrationTest`)
+Tests complets utilisant `TestRestTemplate` avec l'application démarrée sur un port aléatoire.
+
+**Couverture des tests:**
+- ✅ Test des requêtes HTTP réelles
+- ✅ Validation de l'accessibilité des endpoints
+- ✅ Vérification que les réponses ne sont pas vides
+- ✅ Test du comportement global de l'application
+
+### Exécution des Tests
+
+#### Exécuter tous les tests
+```bash
+mvn test
+```
+
+#### Exécuter les tests avec rapport de couverture
+```bash
+mvn test jacoco:report
+```
+
+#### Exécuter uniquement les tests unitaires
+```bash
+mvn test -Dtest=HelloControllerTest
+```
+
+#### Exécuter uniquement les tests d'intégration
+```bash
+mvn test -Dtest=HelloControllerIntegrationTest
+```
+
+### Résultats Attendus
+
+Tous les tests doivent passer avec succès:
+```
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+```
+
+### Intégration dans le Pipeline Jenkins
+
+Les tests sont automatiquement exécutés dans le pipeline. Pour ajouter une étape de test:
+
+```groovy
+stage('Run Tests') {
+    steps {
+        sh 'mvn test'
+    }
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
 ```
 
 ---
