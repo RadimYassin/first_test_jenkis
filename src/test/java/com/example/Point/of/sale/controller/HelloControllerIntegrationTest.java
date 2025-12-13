@@ -49,7 +49,7 @@ class HelloControllerIntegrationTest {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo("User dsjhqwjdjqwdc sjsjs");
+        assertThat(response.getBody()).isEqualTo("User");
     }
 
     /**
@@ -63,7 +63,7 @@ class HelloControllerIntegrationTest {
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo("presentation  hsjsj test ");
+        assertThat(response.getBody()).isEqualTo("presentation");
     }
 
     /**
